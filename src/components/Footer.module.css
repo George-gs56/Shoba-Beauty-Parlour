@@ -1,0 +1,191 @@
+.footer {
+  background-color: var(--color-bg-deep);
+  border-top: 1px solid var(--color-border);
+  padding: 80px 0 40px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr;
+  gap: 60px;
+  width: 100%;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Centers subtitle under SHOBA */
+  text-decoration: none;
+  line-height: 1;
+}
+
+.logoTitle {
+  font-size: 2.2rem; /* Your current logo size */
+  letter-spacing: 0.7rem; /* Space between S H O B A */
+  color: #f5f2ef;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.logoSubtitle {
+  margin-top: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.35rem;
+  text-transform: uppercase;
+  color: #b89b6b;
+  white-space: nowrap;
+}
+
+.brandDesc {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.socialLink:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(200, 162, 125, 0.05);
+  transform: translateY(-2px);
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.columnTitle {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-primary);
+}
+
+.hoursList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hoursRow {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 8px;
+  font-size: 0.88rem;
+}
+
+.hoursRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hoursRow span {
+  color: var(--color-text-secondary);
+}
+
+.hoursRow strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.closed {
+  color: var(--color-gold);
+}
+
+.addressBlock {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.addressBlock span {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Footer Bottom */
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 60px;
+  padding-top: 30px;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.scrollTopBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(200, 162, 125, 0.06);
+  border: 1px solid var(--color-border);
+  color: var(--color-gold);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrollTopBtn:hover {
+  background: var(--color-gold);
+  color: #000000;
+  box-shadow: 0 0 10px var(--color-gold-glow);
+}
+
+/* Responsive Viewports */
+@media (max-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 0 30px 0;
+  }
+
+  .footerBottom {
+    flex-direction: column-reverse;
+    gap: 20px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .copyright {
+    line-height: 1.5;
+  }
+}

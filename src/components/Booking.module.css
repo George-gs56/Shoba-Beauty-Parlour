@@ -1,0 +1,190 @@
+.bookingWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.bookingForm {
+  padding: 50px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 30px;
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputGroup label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 12px var(--color-gold-glow);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.inputGroup select option {
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  padding: 10px;
+}
+
+.inputGroup textarea {
+  resize: vertical;
+}
+
+.formFooter {
+  margin-top: 35px;
+}
+
+/* Success Slate */
+.successCard {
+  text-align: center;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.successIcon {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkIcon {
+  color: var(--color-gold);
+  filter: drop-shadow(0 0 8px var(--color-gold-glow));
+}
+
+.successTitle {
+  font-family: var(--font-serif), serif;
+  font-size: 2.2rem;
+  color: var(--color-text-primary);
+  margin-bottom: 15px;
+  letter-spacing: 0.02em;
+}
+
+.successDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin-bottom: 35px;
+}
+
+.receiptDetails {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.receiptRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.receiptRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.receiptRow span {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.receiptRow strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Responsive Viewports */
+@media (max-width: 768px) {
+  .bookingForm {
+    padding: 30px 20px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+
+  .successCard {
+    padding: 30px 20px;
+  }
+
+  .successTitle {
+    font-size: 1.8rem;
+  }
+
+  .receiptDetails {
+    padding: 16px;
+  }
+  
+  .receiptRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-bottom: 12px;
+  }
+}

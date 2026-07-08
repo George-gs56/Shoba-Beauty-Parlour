@@ -1,0 +1,178 @@
+.tabContainer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 15px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 20px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tabBtn:hover {
+  color: var(--color-gold);
+}
+
+.activeTab {
+  color: var(--color-gold-hover);
+}
+
+.activeUnderline {
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--color-gold-glow);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  justify-content: space-between;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.serviceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: rgba(200, 162, 125, 0.05);
+  border: 1px solid rgba(200, 162, 125, 0.1);
+  border-radius: 50%;
+  color: var(--color-gold);
+}
+
+.priceTag {
+  display: flex;
+  align-items: baseline;
+  color: var(--color-gold-hover);
+  font-family: var(--font-serif), serif;
+  font-size: 1.4rem;
+  line-height: 1;
+  gap: 2px;
+}
+
+.rupeeSymbol {
+  font-size: 1rem;
+  margin-top: 3px;
+}
+
+.serviceName {
+  font-family: var(--font-serif), serif;
+  font-size: 1.45rem;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.metaInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 15px;
+}
+
+.metaIcon {
+  color: var(--color-gold);
+}
+
+.serviceDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 15px;
+}
+
+.featureBadge {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.cardLink {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.cardLink:hover {
+  color: var(--color-gold-hover);
+  border-bottom-color: var(--color-gold-hover);
+  transform: translateX(4px);
+}
+
+/* Responsive Viewports */
+@media (max-width: 768px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .tabContainer {
+    gap: 8px;
+  }
+
+  .tabBtn {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+
+  .activeUnderline {
+    bottom: -16px;
+  }
+}

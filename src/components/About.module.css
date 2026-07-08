@@ -1,0 +1,180 @@
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+
+.aboutTextSide {
+  display: flex;
+  flex-direction: column;
+}
+
+.philosophyText {
+  font-family: var(--font-serif), serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-gold-hover);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.bodyText {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+/* Values Checklist */
+.valuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.valueItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.valueIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(200, 162, 125, 0.08);
+  border: 1px solid var(--color-border);
+  color: var(--color-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(200, 162, 125, 0.05);
+}
+
+.valueTitle {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.valueDesc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Image Side Layout */
+.aboutImageSide {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mainImageFrame {
+  position: relative;
+  width: 78%;
+  height: 82%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.subImageFrame {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 52%;
+  height: 48%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+.aboutImage {
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.aboutImage:hover {
+  transform: scale(1.04);
+}
+
+.floatingCard {
+  position: absolute;
+  top: 35%;
+  left: -8%;
+  z-index: 3;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cardNumber {
+  font-family: var(--font-serif), serif;
+  font-size: 2.2rem;
+  color: var(--color-gold);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.cardLabel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Responsive Viewports */
+@media (max-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .aboutImageSide {
+    height: 520px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .floatingCard {
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutImageSide {
+    height: 400px;
+  }
+
+  .philosophyText {
+    font-size: 1.15rem;
+  }
+
+  .floatingCard {
+    padding: 12px 18px;
+  }
+
+  .cardNumber {
+    font-size: 1.8rem;
+  }
+}

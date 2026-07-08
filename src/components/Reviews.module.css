@@ -1,0 +1,98 @@
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.reviewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.reviewText {
+  font-family: var(--font-serif), serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.serviceBadge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  color: var(--color-gold);
+  background: rgba(200, 162, 125, 0.05);
+  width: fit-content;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  margin-top: auto;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-hover));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #000;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.reviewerName {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 0.03em;
+}
+
+.reviewerLocation {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* Responsive Viewports */
+@media (max-width: 768px) {
+  .reviewsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .reviewCard {
+    padding: 22px;
+  }
+
+  .reviewText {
+    font-size: 0.95rem;
+  }
+}
