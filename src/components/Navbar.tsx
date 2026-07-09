@@ -28,8 +28,17 @@ export default function Navbar() {
         <div className={styles.navContainer}>
           {/* Logo */}
           <a href="#home" className={styles.logo}>
-            <span className={styles.logoTitle}>SHOBA</span>
-            <span className={styles.logoSubtitle}>Beauty Parlour</span>
+            <div className={styles.logoImgWrapper}>
+              <img 
+                src="/images/beauty.png" 
+                alt="Shoba Logo" 
+                className={styles.logoImg}
+              />
+            </div>
+            <div className={styles.logoTextWrapper}>
+              <span className={styles.logoTitle}>SHOBA</span>
+              <span className={styles.logoSubtitle}>Beauty Parlour</span>
+            </div>
           </a>
 
           {/* Desktop Nav Links */}
@@ -79,8 +88,17 @@ export default function Navbar() {
           >
             <div className={styles.drawerHeader}>
               <span className={styles.logo}>
-                <span className={styles.logoTitle}>SHOBA</span>
-                <span className={styles.logoSubtitle}>Beauty Parlour</span>
+                <div className={styles.logoImgWrapper}>
+                  <img 
+                    src="/images/beauty.png" 
+                    alt="Shoba Logo" 
+                    className={styles.logoImg}
+                  />
+                </div>
+                <div className={styles.logoTextWrapper}>
+                  <span className={styles.logoTitle}>SHOBA</span>
+                  <span className={styles.logoSubtitle}>Beauty Parlour</span>
+                </div>
               </span>
               <button className={styles.drawerClose} onClick={() => setIsOpen(false)}>
                 <X size={28} />

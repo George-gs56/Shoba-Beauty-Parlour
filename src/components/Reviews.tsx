@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./Reviews.module.css";
 
@@ -107,12 +107,26 @@ const reviews = [
   },
 ];
 
+import { X, Check } from "lucide-react";
+
 export default function Reviews() {
+  const [reviewsList, setReviewsList] = useState(reviews);
   const [activeIndex, setActiveIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);
   const [cardWidth, setCardWidth] = useState(340);
   const [gap, setGap] = useState(24);
   const [windowWidth, setWindowWidth] = useState(1200);
+
+  // Review modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+    rating: 5,
+    service: "Traditional Bridal Makeup",
+    text: "",
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -136,7 +150,7 @@ export default function Reviews() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const maxIndex = Math.max(0, reviews.length - itemsToShow);
+  const maxIndex = Math.max(0, reviewsList.length - itemsToShow);
   const safeIndex = Math.min(activeIndex, maxIndex);
 
   const handlePrev = () => {
@@ -156,6 +170,63 @@ export default function Reviews() {
   const leftConstraint = -(maxIndex * (cardWidth + gap)) + centerOffset;
   const rightConstraint = centerOffset;
 
+  // Form actions
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleStarClick = (ratingVal: number) => {
+    setFormData((prev) => ({ ...prev, rating: ratingVal }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.text) {
+      alert("Please fill in your name and feedback.");
+      return;
+    }
+
+    // Create initials for avatar
+    const initials = formData.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .substring(0, 2)
+      .toUpperCase();
+
+    const newReview = {
+      id: reviewsList.length + 1,
+      name: formData.name,
+      location: formData.location || "Tamil Nadu",
+      rating: formData.rating,
+      service: formData.service,
+      text: formData.text,
+      avatar: initials || "U",
+    };
+
+    setReviewsList((prev) => [newReview, ...prev]);
+    setIsSuccess(true);
+    
+    // Reset form
+    setFormData({
+      name: "",
+      location: "",
+      rating: 5,
+      service: "Traditional Bridal Makeup",
+      text: "",
+    });
+
+    // Auto close success page
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsSuccess(false);
+      setActiveIndex(0); // Scroll to the newly added review
+    }, 2500);
+  };
+
   return (
     <section id="reviews" className="section" style={{ backgroundColor: "var(--color-bg-deep)", overflow: "hidden" }}>
       <div
@@ -170,7 +241,7 @@ export default function Reviews() {
       />
 
       <div className="container" style={{ position: "relative" }}>
-        {/* Header without navigation controls */}
+        {/* Header with nav controls & DropReview Button */}
         <div className={styles.sectionHeader}>
           <div className="luxury-title-container" style={{ marginBottom: 0 }}>
             <span className="luxury-subtitle">Client Stories</span>
@@ -181,6 +252,14 @@ export default function Reviews() {
               From Tamil Nadu brides and professionals — authentic experiences at Shoba Beauty Parlour.
             </p>
           </div>
+
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="btn-primary"
+            style={{ padding: "10px 24px", fontSize: "0.85rem" }}
+          >
+            Drop a Review
+          </button>
         </div>
 
         {/* Carousel Viewport with overlays */}
@@ -216,7 +295,7 @@ export default function Reviews() {
               animate={{ x: xPosition }}
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
             >
-              {reviews.map((review, idx) => {
+              {reviewsList.map((review, idx) => {
                 // Visible check
                 const isVisible = idx >= safeIndex && idx < safeIndex + itemsToShow;
                 return (
@@ -282,6 +361,147 @@ export default function Reviews() {
           </div>
         )}
       </div>
+
+      {/* Modal Popup */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={styles.modalContent}
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+            >
+              {!isSuccess ? (
+                <>
+                  <div className={styles.modalHeader}>
+                    <h3 className={styles.modalTitle}>
+                      Share Your <span>Story</span>
+                    </h3>
+                    <button
+                      className={styles.closeBtn}
+                      onClick={() => setIsModalOpen(false)}
+                      aria-label="Close form"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className={styles.modalBody}>
+                    <div className={styles.formGroup}>
+                      <span className={styles.formLabel}>Rating</span>
+                      <div className={styles.starRatingSelector}>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            className={styles.starSelectorBtn}
+                            onClick={() => handleStarClick(star)}
+                            aria-label={`Rate ${star} stars`}
+                          >
+                            <Star
+                              size={24}
+                              fill={star <= formData.rating ? "var(--color-gold)" : "none"}
+                              color="var(--color-gold)"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="reviewerName" className={styles.formLabel}>
+                        Your Name
+                      </label>
+                      <input
+                        id="reviewerName"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="e.g. Priyadharshini K"
+                        className={styles.formInput}
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="reviewerLocation" className={styles.formLabel}>
+                        Your Location
+                      </label>
+                      <input
+                        id="reviewerLocation"
+                        type="text"
+                        name="location"
+                        value={formData.location}
+                        onChange={handleInputChange}
+                        placeholder="e.g. Krishnagiri, Tamil Nadu"
+                        className={styles.formInput}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="serviceCategory" className={styles.formLabel}>
+                        Service Received
+                      </label>
+                      <select
+                        id="serviceCategory"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className={styles.formSelect}
+                      >
+                        <option value="Traditional Bridal Makeup">Traditional Bridal Makeup</option>
+                        <option value="HD Bridal Makeup">HD Bridal Makeup</option>
+                        <option value="Airbrush Bridal Makeup">Airbrush Bridal Makeup</option>
+                        <option value="Engagement & Roka Makeup">Engagement & Roka Makeup</option>
+                        <option value="Festive & Party Makeup">Festive & Party Makeup</option>
+                        <option value="Bridesmaid Makeup">Bridesmaid Makeup</option>
+                        <option value="Hair Couture Styling">Hair Couture Styling</option>
+                      </select>
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="reviewerText" className={styles.formLabel}>
+                        Your Feedback
+                      </label>
+                      <textarea
+                        id="reviewerText"
+                        name="text"
+                        value={formData.text}
+                        onChange={handleInputChange}
+                        placeholder="Share your beauty transformation experience..."
+                        className={styles.formTextArea}
+                        required
+                      />
+                    </div>
+
+                    <button type="submit" className={`btn-primary ${styles.submitBtn}`}>
+                      Submit Review
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className={styles.successWrapper}>
+                  <div className={styles.successIconWrapper}>
+                    <Check size={36} />
+                  </div>
+                  <h3 className={styles.successTitle}>Thank You!</h3>
+                  <p className={styles.successText}>
+                    Your review has been successfully submitted and added to the Shoba stories gallery. We appreciate your love!
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

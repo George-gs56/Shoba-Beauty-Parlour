@@ -1,0 +1,143 @@
+.loaderContainer {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(7, 7, 7, 0.55);
+  backdrop-filter: blur(20px); /* frosted glass blur */
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99; /* Ensure it stays above everything */
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  /* background: radial-gradient(circle, rgba(200, 162, 125, 0.12) 0%, transparent 70%); */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; /* larger gap between image and text */
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px; /* larger wrapper for big elements */
+  padding: 20px;
+}
+
+.beautyImgWrapper {
+  width: 320px;
+  height: 320px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border-radius: 100%;
+  background-color: #18171711 !important;
+  backdrop-filter: blur(9.9px) !important;
+    /* -webkit-backdrop-filter: blur(9.9px) !important; */
+  border: 1px solid #c8a27d;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: #e6e7ec00; */
+  /* filter: invert(1); */
+  /* filter: drop-shadow(0 0 5px rgba(200, 162, 125, 0.3)); */
+}
+
+
+.beautyImg{
+  border: 1px solid white !important;
+  background: transparent !important;
+  background-color: #18171707;
+  opacity: 1;
+}
+
+.beautyImgWrapper image{
+  border: 1px solid white;
+}
+
+/* .beautyImgWrapper,
+.beautyImgWrapper img,
+.beautyImgWrapper span {
+  background: transparent;
+} */
+
+@media (max-width: 640px) {
+  .beautyImgWrapper {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+.beautyImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
+
+
+
+
+.logoTextWrapper {
+  height: 110px; /* larger height for large typography */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mainTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3.5rem; /* much larger typography */
+  letter-spacing: 0.7rem;
+  color: #f5f2ef;
+  display: flex;
+  justify-content: center;
+  text-shadow: 0 0 20px rgba(245, 242, 239, 0.25);
+  margin: 0;
+  padding-left: 0.7rem; /* counterbalance letter spacing alignment */
+}
+
+@media (max-width: 640px) {
+  .mainTitle {
+    font-size: 2.6rem;
+    letter-spacing: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+.subtitle {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.78rem;
+  color: #b89b6b;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+

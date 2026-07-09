@@ -197,3 +197,206 @@
     font-size: 0.95rem;
   }
 }
+
+/* ── Drop Review Modal Styles ── */
+.dropReviewBtn {
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  padding: 20px;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 500px;
+  background: #111111;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px var(--color-gold-glow);
+  overflow: hidden;
+  position: relative;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modalTitle {
+  font-family: var(--font-serif), serif;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.modalTitle span {
+  color: var(--color-gold);
+  font-style: italic;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: var(--color-gold);
+}
+
+.modalBody {
+  padding: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.starRatingSelector {
+  display: flex;
+  gap: 8px;
+}
+
+.starSelectorBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.starSelectorBtn:hover {
+  transform: scale(1.15);
+}
+
+.formInput {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.formInput:focus {
+  border-color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px var(--color-gold-glow);
+}
+
+.formSelect {
+  background: #111111;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.formSelect:focus {
+  border-color: var(--color-gold);
+}
+
+.formTextArea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  min-height: 100px;
+  resize: vertical;
+  transition: all 0.3s;
+}
+
+.formTextArea:focus {
+  border-color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px var(--color-gold-glow);
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Success State */
+.successWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.successIconWrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(200, 162, 125, 0.1);
+  border: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px var(--color-gold-glow);
+}
+
+.successTitle {
+  font-family: var(--font-serif), serif;
+  font-size: 1.8rem;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+}
+
+.successText {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  max-width: 320px;
+  line-height: 1.6;
+}
+

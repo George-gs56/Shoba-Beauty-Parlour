@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -7,36 +11,66 @@ import Reviews from "@/components/Reviews";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 import ThreeBackgroundWrapper from "@/components/ThreeBackgroundWrapper";
+import OpeningLoader from "@/components/OpeningLoader";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  // Disable scroll while loading
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
+
   return (
-    <div style={{ position: "relative", minHeight: "100vh", width: "100vw", overflowX: "hidden" }}>
-      {/* Three.js Global Background Animation */}
-      <ThreeBackgroundWrapper />
+    <>
+      <AnimatePresence mode="wait">
+        {loading && (
+          <OpeningLoader key="loader" onComplete={() => setLoading(false)} />
+        )}
+      </AnimatePresence>
 
-      {/* Dynamic Header */}
-      <Navbar />
+      <div style={{ position: "relative", minHeight: "100vh", width: "100vw", overflowX: "hidden" }}>
+        {/* Three.js Global Background Animation */}
+        <ThreeBackgroundWrapper />
 
-      {/* Hero Section */}
-      <Hero />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: loading ? 0 : 1 }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+          style={{ pointerEvents: loading ? "none" : "auto" }}
+        >
+          {/* Dynamic Header */}
+          <Navbar />
 
-      {/* About Philosophy Section */}
-      <About />
+          {/* Hero Section */}
+          <Hero />
 
-      {/* Makeup Services Section */}
-      <Services />
+          {/* About Philosophy Section */}
+          <About />
 
-      {/* Makeup Gallery Carousel */}
-      <MakeupGallery />
+          {/* Makeup Services Section */}
+          <Services />
 
-      {/* Client Reviews */}
-      <Reviews />
+          {/* Makeup Gallery Carousel */}
+          <MakeupGallery />
 
-      {/* Booking Reservations Section */}
-      <Booking />
+          {/* Client Reviews */}
+          <Reviews />
 
-      {/* Footer Section */}
-      <Footer />
-    </div>
+          {/* Booking Reservations Section */}
+          <Booking />
+
+          {/* Footer Section */}
+          <Footer />
+        </motion.div>
+      </div>
+    </>
   );
 }

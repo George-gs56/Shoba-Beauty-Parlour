@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles as SparklesIcon } from "lucide-react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
+import gsap from "gsap";
 
 const heroImages = [
   { src: "/images/about_makeup.jpg", alt: "Professional Makeup Styling" },
@@ -25,12 +26,45 @@ const sparkles = [
 export default function Hero() {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % heroImages.length);
     }, 4500);
     return () => clearInterval(timer);
+  }, []);
+
+  // GSAP Scroll Parallax Animation
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+
+      // Parallax shifts using GSAP with smooth transitions
+      gsap.to(`.${styles.floating3DBg}`, {
+        y: scrolled * 0.45,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+
+      gsap.to(`.${styles.heroTextContent}`, {
+        y: scrolled * 0.18,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+
+      gsap.to(`.${styles.heroCanvasContainer}`, {
+        y: -scrolled * 0.08,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -45,7 +79,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className={styles.heroSection} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+    <section ref={containerRef} id="home" className={styles.heroSection} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
       {/* Background Glow Orbs */}
       <div
         className="glow-orb"
@@ -67,7 +101,7 @@ export default function Hero() {
           background: "rgba(230, 184, 162, 0.06)",
         }}
       />
-      {/* 3D Floating Background Shapes */}
+      {/* 3D Floating Background Shapes with GSAP Parallax */}
       <div className={styles.floating3DBg}>
         {/* Layer 1: Far Depth Layer (translateZ -120px) */}
         <motion.div
@@ -104,7 +138,7 @@ export default function Hero() {
       </div>
 
       <div className={styles.heroContainer}>
-        {/* Left Column: Typography Content */}
+        {/* Left Column: Typography Content with GSAP Parallax */}
         <motion.div
           className={styles.heroTextContent}
           initial={{ opacity: 0, x: -50 }}
@@ -149,14 +183,15 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Column: Premium CSS/Framer Motion Beauty Animation */}
+        {/* Right Column: Premium Visual Animation with GSAP scroll Y shift + interactive mouse tilt */}
         <motion.div
           className={styles.heroCanvasContainer}
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            transform: `rotateY(${mousePosition.x}deg) rotateX(${-mousePosition.y}deg)`,
+            rotateY: mousePosition.x,
+            rotateX: -mousePosition.y,
             transition: "transform 0.1s ease-out"
           }}
         >
