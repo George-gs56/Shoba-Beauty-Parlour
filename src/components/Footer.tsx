@@ -17,7 +17,7 @@ export default function Footer() {
             <div className={styles.logoWrapper}>
               <div className={styles.logoImgWrapper}>
                 <img 
-                  src="/images/beauty.png" 
+                  src="/images/beauty_old.png" 
                   alt="Shoba Logo" 
                   className={styles.logoImg}
                 />
@@ -78,22 +78,7 @@ export default function Footer() {
             </address>
           </div>
 
-          {/* Column 4: Location Map */}
-          <div className={`${styles.footerColumn} ${styles.footerColumnMap}`}>
-            <h4 className={styles.columnTitle}>Our Location</h4>
-            <div className={styles.mapWrapper}>
-              <iframe
-                title="Shoba Beauty Parlour Google Map Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15582.493922378943!2d78.286245!3d12.5514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bac28df2b947c61%3A0xe9fdf4e456cf7fb0!2sElathagiri%2C%20Tamil%20Nadu%20635108!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: "150px" }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
+
         </div>
 
         {/* Bottom Line */}

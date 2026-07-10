@@ -9,6 +9,7 @@ import Services from "@/components/Services";
 import MakeupGallery from "@/components/MakeupGallery";
 import Reviews from "@/components/Reviews";
 import Booking from "@/components/Booking";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ThreeBackgroundWrapper from "@/components/ThreeBackgroundWrapper";
 import OpeningLoader from "@/components/OpeningLoader";
@@ -66,6 +67,9 @@ export default function Home() {
 
           {/* Booking Reservations Section */}
           <Booking />
+
+          {/* Contact Section */}
+          <Contact />
 
           {/* Footer Section */}
           <Footer />

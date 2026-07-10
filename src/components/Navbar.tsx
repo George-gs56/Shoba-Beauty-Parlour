@@ -14,7 +14,7 @@ export default function Navbar() {
     { name: "Services", href: "#services" },
     { name: "Gallery", href: "#makeupgallery" },
     { name: "Reviews", href: "#reviews" },
-    { name: "Reservations", href: "#booking" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -30,7 +30,7 @@ export default function Navbar() {
           <a href="#home" className={styles.logo}>
             <div className={styles.logoImgWrapper}>
               <img 
-                src="/images/beauty.png" 
+                src="/images/beauty_old.png" 
                 alt="Shoba Logo" 
                 className={styles.logoImg}
               />
@@ -59,9 +59,18 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Call to Action */}
-          <div className={styles.navActions}>
-            <a href="#booking" className="btn-primary" style={{ padding: "8px 20px", fontSize: "0.8rem" }}>
+          <div className={styles.navActions} style={{ gap: "10px" }}>
+            <a href="#booking" className="btn-primary" style={{ padding: "8px 20px", fontSize: "0.8rem", whiteSpace: "nowrap" }}>
               Book Now <ArrowRight size={14} />
+            </a>
+            <a 
+              href="https://www.google.com/maps/place/Shoba+saloon+and+spa/@12.5484799,78.2920555,17z/data=!4m8!3m7!1s0x3badcb9feb7f55d1:0xdc2cb6a30a6a7da1!8m2!3d12.5484799!4d78.2920555!9m1!1b1!16s%2Fg%2F11llp6b1jm?entry=ttu&g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-secondary" 
+              style={{ padding: "8px 20px", fontSize: "0.8rem", whiteSpace: "nowrap" }}
+            >
+              Write a Review
             </a>
           </div>
 
@@ -90,7 +99,7 @@ export default function Navbar() {
               <span className={styles.logo}>
                 <div className={styles.logoImgWrapper}>
                   <img 
-                    src="/images/beauty.png" 
+                    src="/images/beauty_old.png" 
                     alt="Shoba Logo" 
                     className={styles.logoImg}
                   />
@@ -121,13 +130,26 @@ export default function Navbar() {
               <motion.a
                 href="#booking"
                 className="btn-primary"
-                style={{ marginTop: "30px", width: "100%" }}
+                style={{ marginTop: "30px", width: "100%", textAlign: "center" }}
                 onClick={() => setIsOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 Book Appointment
+              </motion.a>
+              <motion.a
+                href="https://www.google.com/maps/place/Shoba+saloon+and+spa/@12.5484799,78.2920555,17z/data=!4m8!3m7!1s0x3badcb9feb7f55d1:0xdc2cb6a30a6a7da1!8m2!3d12.5484799!4d78.2920555!9m1!1b1!16s%2Fg%2F11llp6b1jm?entry=ttu&g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                style={{ marginTop: "12px", width: "100%", textAlign: "center" }}
+                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45 }}
+              >
+                Write a Review
               </motion.a>
             </div>
           </motion.div>

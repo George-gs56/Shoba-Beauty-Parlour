@@ -84,10 +84,10 @@ export default function OpeningLoader({ onComplete }: OpeningLoaderProps) {
               transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <Image
-                src="/images/beauty.png"
+                src="/images/beauty_old.png"
                 alt="Shoba Beauty Logo"
-                width={380}
-                height={380}
+                width={450}
+                height={450}
                 className={styles.beautyImg}
                 priority
               />

@@ -261,6 +261,10 @@
 
 /* Responsive Viewports */
 @media (max-width: 1024px) {
+  .heroSection {
+    padding-top: 120px;
+  }
+
   .heroContainer {
     flex-direction: column;
     text-align: center;
@@ -301,7 +305,7 @@
 
 @media (max-width: 768px) {
   .heroSection {
-    padding-top: 75px;
+    padding-top: 135px;
     height: auto;
     min-height: auto;
   }
