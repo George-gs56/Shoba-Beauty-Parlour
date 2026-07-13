@@ -8,8 +8,8 @@ export default function Contact() {
   const contactDetails = {
     name: "Shoba Beauty Parlour",
     mobile: "+91 9994062045",
-    email: "shoba-parlour@gmail.com",
-    address: "KTM Nagar, Elathagiri RD, Palepalle, Krishnagiri, Tamil Nadu 635108",
+    email: "jenics23@gmail.com",
+    address: "No:220/B, KTM Nagar, Elathagiri, Krishnagiri, Tamil Nadu 635108",
     workingHours: [
       { days: "Monday - Friday", hours: "09:00 AM - 08:00 PM" },
       { days: "Saturday", hours: "07:00 AM - 08:00 PM" },

@@ -253,13 +253,13 @@ export default function Reviews() {
             </p>
           </div>
 
-          <button
+          {/* <button
             onClick={() => setIsModalOpen(true)}
             className="btn-primary"
             style={{ padding: "10px 24px", fontSize: "0.85rem" }}
           >
             Drop a Review
-          </button>
+          </button> */}
         </div>
 
         {/* Carousel Viewport with overlays */}

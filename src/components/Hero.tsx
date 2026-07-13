@@ -172,12 +172,12 @@ export default function Hero() {
           {/* Micro Stats / Highlights */}
           <div className={styles.highlights}>
             <div className={styles.highlightItem}>
-              <span className={styles.highlightVal}>98%</span>
+              <span className={styles.highlightVal}>98.9%</span>
               <span className={styles.highlightLabel}>Natural Botanicals</span>
             </div>
             <div className={styles.highlightDivider} />
             <div className={styles.highlightItem}>
-              <span className={styles.highlightVal}>12+</span>
+              <span className={styles.highlightVal}>6+</span>
               <span className={styles.highlightLabel}>Years of Excellence</span>
             </div>
           </div>

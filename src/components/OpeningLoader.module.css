@@ -38,8 +38,8 @@
 }
 
 .beautyImgWrapper {
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
   position: relative;
   display: flex;
   align-items: center;
@@ -60,10 +60,11 @@
 
 
 .beautyImg{
-  border: 1px solid white !important;
+  /* border: 1px solid white !important; */
   background: transparent !important;
   background-color: #18171707;
   opacity: 1;
+  background-size: cover;
 }
 
 .beautyImgWrapper image{
@@ -84,8 +85,8 @@
 }
 
 .beautyImg {
-  width: 100%;
-  height: 100%;
+  width: 160%;
+  height: 160%;
   object-fit: contain;
   filter: brightness(0) saturate(100%) invert(69%) sepia(18%) saturate(1209%) hue-rotate(334deg) brightness(87%) contrast(90%);
 }

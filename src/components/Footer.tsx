@@ -67,13 +67,12 @@ export default function Footer() {
           <div className={styles.footerColumn}>
             <h4 className={styles.columnTitle}>Address Details:</h4>
             <address className={styles.addressBlock}>
-              <p>KTM Nagar, Elathagiri RD, Palepalle</p>
-              <p>Krishnagiri, Tamil Nadu 635108</p>
-              <p style={{ marginTop: "15px" }}>
+              <p>No:220/B, KTM Nagar, Elathagiri, Krishnagiri, Tamil Nadu - 635108</p>
+              <p style={{ marginTop: "1px" }}>
                 <span>Phone:</span> +91 9994062045
               </p>
-              <p>
-                <span>Email:</span> shoba-parlour@gmail.com
+              <p style={{ marginTop: "0px" }}>
+                <span>Email:</span> jenics23@gmail.com
               </p>
             </address>
           </div>
