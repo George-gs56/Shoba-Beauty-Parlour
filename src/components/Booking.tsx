@@ -19,10 +19,24 @@ export default function Booking() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const getTodayString = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.service || !form.date || !form.time) {
       alert("Please fill in all required fields.");
+      return;
+    }
+
+    const todayStr = getTodayString();
+    if (form.date < todayStr) {
+      setErrorMessage("Please select today's date or a future date.");
       return;
     }
 
@@ -166,6 +180,7 @@ export default function Booking() {
                       type="date"
                       id="date"
                       required
+                      min={getTodayString()}
                       value={form.date}
                       onChange={(e) => setForm({ ...form, date: e.target.value })}
                     />

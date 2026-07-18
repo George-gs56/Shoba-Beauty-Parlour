@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       from: `"${name} (Contact Form)" <${gmailUser}>`,
       to: 'jenics23@gmail.com',
       replyTo: email,
-      subject: `✨ New Inquiry from ${name} - Shoba Beauty Parlour`,
+      subject: `💕 New Inquiry from ${name} - Shoba Beauty Parlour`,
       text: `You have received a new contact form submission:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: 'Montserrat', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #070707; border: 1px solid #c8a27d; border-radius: 8px; color: #f7f4f0;">
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     const customerMailOptions = {
       from: `"Shoba Beauty Parlour" <${gmailUser}>`,
       to: email,
-      subject: `✨ We've received your message! - Shoba Beauty Parlour`,
+      subject: `💕 We've received your message! - Shoba Beauty Parlour`,
       text: `Hello ${name},\n\nThank you for contacting Shoba Beauty Parlour. We have received your inquiry and will get back to you shortly.\n\nYour Message:\n"${message}"\n\nWarm regards,\nShoba Beauty Parlour Team`,
       html: `
         <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #070707; border: 1px solid rgba(200, 162, 125, 0.2); border-radius: 12px; color: #f7f4f0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">

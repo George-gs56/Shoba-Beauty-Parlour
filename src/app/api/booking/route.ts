@@ -14,6 +14,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validate that the selected date is not in the past relative to India timezone (Asia/Kolkata)
+    const getTodayString = () => {
+      const today = new Date();
+      const options = { timeZone: 'Asia/Kolkata', year: 'numeric' as const, month: '2-digit' as const, day: '2-digit' as const };
+      const formatter = new Intl.DateTimeFormat('en-CA', options);
+      return formatter.format(today);
+    };
+
+    const todayStr = getTodayString();
+    if (date < todayStr) {
+      return NextResponse.json(
+        { error: 'Reservations are only allowed for today or upcoming dates.' },
+        { status: 400 }
+      );
+    }
+
     const gmailUser = process.env.GMAIL_USER;
     const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
 
@@ -63,9 +79,9 @@ export async function POST(request: Request) {
     // A. Notification to the salon owner
     const salonMailOptions = {
       from: `"${name} (Booking Inquiry)" <${gmailUser}>`,
-      to: 'whitegeorge5611@gmail.com',
+      to: 'jenics23@gmail.com',
       replyTo: email,
-      subject: `📅 New Booking Request: ${name} - ${serviceLabel}`,
+      subject: `🗓️ New Booking Request: ${name} - ${serviceLabel}`,
       text: `You have received a new booking reservation request:\n\nName: ${name}\nEmail: ${email}\nService: ${serviceLabel}\nDate: ${date}\nTime: ${time}\nSpecial Requests: ${notes || 'None'}`,
       html: `
         <div style="font-family: 'Montserrat', sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; background-color: #070707; border: 1px solid #c8a27d; border-radius: 8px; color: #f7f4f0;">
@@ -90,7 +106,7 @@ export async function POST(request: Request) {
     const customerMailOptions = {
       from: `"Shoba Beauty Parlour" <${gmailUser}>`,
       to: email,
-      subject: `📅 Reservation Requested! - Shoba Beauty Parlour`,
+      subject: `🗓️ Reservation Requested! - Shoba Beauty Parlour`,
       text: `Hello ${name},\n\nWe have received your reservation request for ${serviceLabel} on ${date} at ${time}.\n\nWe will review the slot availability and contact you shortly to confirm.\n\nWarm regards,\nShoba Beauty Parlour Team`,
       html: `
         <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #070707; border: 1px solid rgba(200, 162, 125, 0.2); border-radius: 12px; color: #f7f4f0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">
