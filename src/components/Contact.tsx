@@ -1,10 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import styles from "./Contact.module.css";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+      } else {
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setErrorMessage("Failed to send message. Please check your connection.");
+      setStatus("error");
+    }
+  };
+
   const contactDetails = {
     name: "Shoba Beauty Parlour",
     mobile: "+91 9994062045",
@@ -149,29 +193,162 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Right Side: Google Map card */}
+          {/* Right Side: Contact form card */}
           <motion.div
-            className={`${styles.mapCard} glass-card`}
+            className={`${styles.formCard} glass-card`}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h3 className={styles.mapTitle}>Our Location</h3>
-            <div className={styles.mapWrapper}>
-              <iframe
-                title="Shoba Saloon and Spa Google Map Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3895.5398288599427!2d78.2894806!3d12.5484799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3badcb9feb7f55d1%3A0xdc2cb6a30a6a7da1!2sShoba+saloon+and+spa!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: "350px" }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+            <AnimatePresence mode="wait">
+              {status === "success" ? (
+                <motion.div
+                  key="contact-success"
+                  className={styles.successCard}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                >
+                  <div className={styles.successIcon}>
+                    <CheckCircle2 size={56} className={styles.checkIcon} />
+                  </div>
+                  <h3 className={styles.successTitle}>Message Sent</h3>
+                  <p className={styles.successDesc}>
+                    Thank you, <strong>{form.name}</strong>. We have received your message. 
+                    A confirmation email has been sent to <strong>{form.email}</strong>. 
+                    We will get back to you shortly!
+                  </p>
+                  <button
+                    onClick={() => {
+                      setStatus("idle");
+                      setForm({ name: "", email: "", message: "" });
+                    }}
+                    className="btn-secondary"
+                    style={{ marginTop: "24px", width: "100%" }}
+                  >
+                    Send Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="contact-form"
+                  className={styles.formGrid}
+                  onSubmit={handleSubmit}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <h3 className={styles.cardTitle} style={{ fontSize: "1.8rem" }}>Salon Inquiry form / Get in Touch Form</h3>
+                  <p style={{ color: "var(--color-text-secondary)", fontSize: "0.9rem", marginBottom: "10px" }}>
+                    Have a question or want to discuss bridal packages? Drop us a line.
+                  </p>
+
+                  {/* Name */}
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="contact-name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      required
+                      placeholder="e.g. Your Name"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      disabled={status === "submitting"}
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="contact-email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="contact-email"
+                      required
+                      placeholder="e.g. example@gmail.com"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      disabled={status === "submitting"}
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="contact-message">Message *</label>
+                    <textarea
+                      id="contact-message"
+                      required
+                      rows={5}
+                      placeholder="Tell us what you're looking for..."
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      disabled={status === "submitting"}
+                    />
+                  </div>
+
+                  {status === "error" && (
+                    <motion.div 
+                      style={{ 
+                        display: "flex", 
+                        alignItems: "center", 
+                        gap: "8px", 
+                        color: "#ef4444", 
+                        fontSize: "0.85rem",
+                        marginTop: "10px" 
+                      }}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <AlertCircle size={16} />
+                      <span>{errorMessage}</span>
+                    </motion.div>
+                  )}
+
+                  <div className={styles.formFooter}>
+                    <button
+                      type="submit"
+                      className="btn-primary"
+                      disabled={status === "submitting"}
+                      style={{ width: "100%", padding: "14px" }}
+                    >
+                      {status === "submitting" ? (
+                        <span className={styles.loader}>Sending Message...</span>
+                      ) : (
+                        <>
+                          Send Message <Send size={14} />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
+
+        {/* Bottom Full-width Google Map card */}
+        <motion.div
+          className={`${styles.mapCardFullWidth} glass-card`}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
+          <h3 className={styles.mapTitle}>Our Location</h3>
+          <div className={styles.mapWrapper} style={{ minHeight: "400px" }}>
+            <iframe
+              title="Shoba Saloon and Spa Google Map Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3895.5398288599427!2d78.2894806!3d12.5484799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3badcb9feb7f55d1%3A0xdc2cb6a30a6a7da1!2sShoba+saloon+and+spa!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: "400px" }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

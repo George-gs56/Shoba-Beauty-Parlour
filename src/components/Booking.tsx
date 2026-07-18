@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, Sparkles, Send, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import styles from "./Booking.module.css";
 
 export default function Booking() {
@@ -10,7 +10,6 @@ export default function Booking() {
     name: "",
     email: "",
     service: "",
-    elixir: "none",
     date: "",
     time: "",
     notes: "",
@@ -18,8 +17,9 @@ export default function Booking() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.service || !form.date || !form.time) {
       alert("Please fill in all required fields.");
@@ -27,11 +27,30 @@ export default function Booking() {
     }
 
     setIsSubmitting(true);
-    // Simulate API reservation call
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Booking error:", error);
+      setErrorMessage("Failed to send booking request. Please check your connection.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+    }
   };
 
   const servicesList = [
@@ -49,12 +68,7 @@ export default function Booking() {
     { value: "minimalist", label: "Minimalist 'No-Makeup' Makeup" },
   ];
 
-  const elixirsList = [
-    { value: "none", label: "No customized elixir" },
-    { value: "rose", label: "Rose Radiance Elixir" },
-    { value: "gold", label: "Golden Honey Nectar" },
-    { value: "aloe", label: "Aloe Pure Infusion" },
-  ];
+
 
   return (
     <section id="booking" className="section" style={{ backgroundColor: "var(--color-bg-deep)" }}>
@@ -141,21 +155,7 @@ export default function Booking() {
                     </select>
                   </div>
 
-                  {/* Elixir Lab Integration */}
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="elixir">
-                      Custom Elixir Base <Sparkles size={12} style={{ color: "var(--color-gold)", marginLeft: "4px" }} />
-                    </label>
-                    <select
-                      id="elixir"
-                      value={form.elixir}
-                      onChange={(e) => setForm({ ...form, elixir: e.target.value })}
-                    >
-                      {elixirsList.map((e) => (
-                        <option key={e.value} value={e.value}>{e.label}</option>
-                      ))}
-                    </select>
-                  </div>
+
 
                   {/* Date selection */}
                   <div className={styles.inputGroup}>
@@ -207,6 +207,24 @@ export default function Booking() {
                   </div>
                 </div>
 
+                {errorMessage && (
+                  <div 
+                    style={{ 
+                      display: "flex", 
+                      alignItems: "center", 
+                      gap: "8px", 
+                      color: "#ef4444", 
+                      fontSize: "0.85rem",
+                      marginTop: "10px",
+                      marginBottom: "10px",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <AlertCircle size={16} />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
                 <div className={styles.formFooter}>
                   <button
                     type="submit"
@@ -243,14 +261,10 @@ export default function Booking() {
                   <strong> {form.email}</strong>.
                 </p>
 
-                <div className={styles.receiptDetails}>
+                 <div className={styles.receiptDetails}>
                   <div className={styles.receiptRow}>
                     <span>Treatment:</span>
                     <strong>{servicesList.find((s) => s.value === form.service)?.label.split(" ($")[0]}</strong>
-                  </div>
-                  <div className={styles.receiptRow}>
-                    <span>Elixir Option:</span>
-                    <strong>{elixirsList.find((e) => e.value === form.elixir)?.label.split(" (+")[0]}</strong>
                   </div>
                   <div className={styles.receiptRow}>
                     <span>Date:</span>
@@ -269,7 +283,6 @@ export default function Booking() {
                       name: "",
                       email: "",
                       service: "",
-                      elixir: "none",
                       date: "",
                       time: "",
                       notes: "",

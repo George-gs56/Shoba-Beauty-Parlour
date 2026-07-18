@@ -192,6 +192,115 @@ a.value:hover {
   box-shadow: 0 10px 30px var(--color-gold-glow);
 }
 
+.formCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 12px var(--color-gold-glow);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.inputGroup textarea {
+  resize: vertical;
+}
+
+.formFooter {
+  margin-top: 30px;
+}
+
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.successCard {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.successIcon {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkIcon {
+  color: var(--color-gold);
+  filter: drop-shadow(0 0 8px var(--color-gold-glow));
+}
+
+.successTitle {
+  font-family: var(--font-serif), serif;
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.successDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 450px;
+}
+
+.mapCardFullWidth {
+  margin-top: 45px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+
 /* ── Tablet ──────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .contactGrid {
