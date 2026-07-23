@@ -188,3 +188,9 @@
     padding-bottom: 12px;
   }
 }
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1);
+}
+

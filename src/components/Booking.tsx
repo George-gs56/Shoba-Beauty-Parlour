@@ -183,6 +183,12 @@ export default function Booking() {
                       min={getTodayString()}
                       value={form.date}
                       onChange={(e) => setForm({ ...form, date: e.target.value })}
+                      onClick={(e) => {
+                        try {
+                          e.currentTarget.showPicker();
+                        } catch (err) {}
+                      }}
+                      style={{ cursor: "pointer" }}
                     />
                   </div>
 
