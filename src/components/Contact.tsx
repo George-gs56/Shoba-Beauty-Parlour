@@ -240,7 +240,7 @@ export default function Contact() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <h3 className={styles.cardTitle} style={{ fontSize: "1.8rem" }}>Salon Inquiry form / Get in Touch Form</h3>
+                  <h3 className={styles.cardTitle} style={{ fontSize: "1.8rem" }}>Get in Touch Form</h3>
                   <p style={{ color: "var(--color-text-secondary)", fontSize: "0.9rem", marginBottom: "10px" }}>
                     Have a question or want to discuss bridal packages? Drop us a line.
                   </p>

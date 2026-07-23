@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       text: `You have received a new contact form submission:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: 'Montserrat', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #070707; border: 1px solid #c8a27d; border-radius: 8px; color: #f7f4f0;">
-          <h2 style="color: #c8a27d; border-bottom: 1px solid #c8a27d; padding-bottom: 10px; font-family: 'Playfair Display', serif; font-weight: normal;">Salon Inquiry form / Get in Touch Form</h2>
+          <h2 style="color: #c8a27d; border-bottom: 1px solid #c8a27d; padding-bottom: 10px; font-family: 'Playfair Display', serif; font-weight: normal;">Get in Touch Form / Salon Inquiry form</h2>
           <p style="margin: 15px 0;"><strong style="color: #c8a27d;">Name:</strong> ${name}</p>
           <p style="margin: 15px 0;"><strong style="color: #c8a27d;">Email:</strong> <a href="mailto:${email}" style="color: #c8a27d; text-decoration: none;">${email}</a></p>
           <div style="margin-top: 20px; padding: 15px; background-color: #111111; border-radius: 4px; border-left: 3px solid #c8a27d;">
